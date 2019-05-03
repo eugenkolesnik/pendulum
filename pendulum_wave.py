@@ -6,7 +6,7 @@ pygame.init()
 
 res_x = 1024
 res_y = 768
-ball_colour = 0, 255, 255
+ball_colour = 255, 0, 0
 backgrount_colour = 0, 0, 0
 ball_number = 30
 
@@ -19,6 +19,13 @@ while True:
         for n in range(ball_number):
             y += 22
             alfa = degree*(n+1)/10
+            
+            r = int((1 + math.sin(math.radians(alfa)))*255/2)
+            g = 255 - int((1 + math.sin(math.radians(alfa)))*255/2)
+            # b = int((1 + math.sin(math.radians(alfa)))*255/2)
+            b = 100
+            ball_colour = (r, g, b)
+            
             x = int(xoff + math.sin(math.radians(alfa))*150)
             pygame.draw.circle(screen, ball_colour, (x, y), 10)
 
