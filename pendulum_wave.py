@@ -9,6 +9,8 @@ res_y = 768
 ball_colour = 255, 0, 0
 backgrount_colour = 0, 0, 0
 ball_number = 35
+pendulom_width = 150
+speed_delay = 10
 
 screen = pygame.display.set_mode((res_x, res_y))
 middle_x = int(res_x/2)
@@ -26,12 +28,18 @@ while True:
             b = 100
             ball_colour = (r, g, b)
             
-            x = int(middle_x + math.sin(math.radians(alfa))*150)
+            x = int(middle_x + math.sin(math.radians(alfa))*pendulom_width)
             pygame.draw.circle(screen, ball_colour, (x, y), 10)
 
             for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT: pendulom_width -= 10
+                    if event.key == pygame.K_RIGHT: pendulom_width += 10
+                    if event.key == pygame.K_UP: speed_delay -= 10
+                    if event.key == pygame.K_DOWN: speed_delay += 10
+                    if event.key == pygame.K_ESCAPE: pygame.QUIT: sys.exit()
                 if event.type == pygame.QUIT: sys.exit()
 
         pygame.display.update()
-        pygame.time.wait(10)
+        pygame.time.wait(speed_delay)
         screen.fill(backgrount_colour)
