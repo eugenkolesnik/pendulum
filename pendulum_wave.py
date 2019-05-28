@@ -2,7 +2,7 @@ import pygame
 import math
 import sys
 
-pygame.init()
+# pygame.init()
 
 res_x = 1024
 res_y = 768
@@ -22,10 +22,10 @@ while True:
             y += 22
             alfa = degree*(n+1)/10
             
-            r = int((1 + math.sin(math.radians(alfa)))*255/2)
-            g = 255 - int((1 + math.sin(math.radians(alfa)))*255/2)
-            # b = int((1 + math.sin(math.radians(alfa)))*255/2)
-            b = 100
+            r = int((1 + math.sin(math.radians(alfa)))*125/2)
+            g = 255 - int((1 + math.sin(math.radians(alfa)))*125/2)
+            b = int((1 + math.sin(math.radians(alfa)))*30/2)
+            # b = 200
             ball_colour = (r, g, b)
             
             x = int(middle_x + math.sin(math.radians(alfa))*pendulom_width)

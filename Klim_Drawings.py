@@ -93,7 +93,7 @@ while True:
     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(start_x+25*6, start_y+25*7, 20, 20), 0)
 
     for event in pygame.event.get():
-                if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT: sys.exit()
 
     pygame.display.update()
     pygame.time.wait(10)
