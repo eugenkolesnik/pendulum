@@ -11,11 +11,11 @@ size = [1024, 768]
 screen = pygame.display.set_mode(size)
 
 # Define the colors and base position
-BLACK = (  0,   0,   0)
-WHITE = (255, 255, 255)
-BLUE =  (  0,   0, 255)
-GREEN = (  0, 255,   0)
-RED =   (255,   0,   0)
+black = (  0,   0,   0)
+white = (255, 255, 255)
+blue =  (  0,   0, 255)
+green = (  0, 255,   0)
+red =   (255,   0,   0)
 
 base_a = [100, 100]
 base_b = [924, 100]
@@ -58,9 +58,9 @@ def move (coord):
 
 # Draw the base
 pygame.display.set_caption("Drawing the fractal")
-screen.fill(BLACK)
+screen.fill(black)
 for current in all_base:
-        pygame.draw.circle(screen, GREEN, current, 2)    
+        pygame.draw.circle(screen, green, current, 2)    
 
 #Loop until the user clicks the close button.
 done = False
@@ -73,8 +73,8 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done=True
-
-    pygame.draw.circle(screen, RED, start, 2)
+    colour = choice([red, green, blue, white, black])
+    pygame.draw.circle(screen, colour, start, 2)
 
     start = move(start)
 
