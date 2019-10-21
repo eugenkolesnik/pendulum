@@ -7,22 +7,22 @@ from random import choice
 pygame.init()
  
 # Define the colors we will use in RGB format
-BLACK = (  0,   0,   0)
-WHITE = (255, 255, 255)
-BLUE =  (  0,   0, 255)
-GREEN = (  0, 255,   0)
-RED =   (255,   0,   0)
+black = (  0,   0,   0)
+white = (255, 255, 255)
+blue =  (  0,   0, 255)
+green = (  0, 255,   0)
+red =   (255,   0,   0)
 
-CIRCLE_A = [512, 100]
-CIRCLE_B = [100, 668]
-CIRCLE_C = [924, 668]
-START = [350, 500]
+base_a = [512, 100]
+base_b = [100, 668]
+base_c = [924, 668]
+start = [350, 500]
 
-ALL_BALLS = []
-ALL_BALLS.append(CIRCLE_A)
-ALL_BALLS.append(CIRCLE_B)
-ALL_BALLS.append(CIRCLE_C)
-ALL_BALLS.append(START)
+all_base = []
+all_base.append(base_a)
+all_base.append(base_b)
+all_base.append(base_c)
+all_base.append(start)
 
 # Set the height and width of the screen
 size = [1024, 768]
@@ -34,13 +34,30 @@ pygame.display.set_caption("Drawing the fractal")
 done = False
 clock = pygame.time.Clock()
 
-def MOVE (coord):
-    BASE = choice([CIRCLE_A, CIRCLE_B, CIRCLE_C])
-    nx = int((BASE[0] + coord[0]) / 2)
-    ny = int((BASE[1] + coord[1]) / 2)
+def move (coord):
+    base = choice([base_a, base_b, base_c])
+    
+    maxx = max(base[0], coord[0])
+    minx = min(base[0], coord[0])
+    dx = (maxx - minx) / 2
+
+    maxy = max(base[1], coord[1])
+    miny = min(base[1], coord[1])
+    dy = (maxy - miny) / 2
+
+    if coord[0] >= base[0]:
+        nx = int(coord[0] - dx)
+    else:
+        nx = int(coord[0] + dx)
+    
+    if coord[1] >= base[1]:
+        ny = int(coord[1] - dy)
+    else:
+        ny = int(coord[1] + dy)
+    
     coord = [nx, ny]
     return (coord)
- 
+
 while not done:
  
     # Run the loop 10k times per second.
@@ -51,15 +68,15 @@ while not done:
             done=True # Flag that we are done so we exit this loop    
      
     # Clear the screen and set the screen background
-    screen.fill(BLACK)
+    screen.fill(black)
  
     # Draw the field
-    for current in ALL_BALLS:
-        pygame.draw.circle(screen, RED, current, 2)    
+    for current in all_base:
+        pygame.draw.circle(screen, red, current, 2)    
 
     # Create next step field
-    START = MOVE(START)
-    ALL_BALLS.append(START)
+    start = move(start)
+    all_base.append(start)
     
     # update the screen
     pygame.display.flip()

@@ -17,31 +17,49 @@ BLUE =  (  0,   0, 255)
 GREEN = (  0, 255,   0)
 RED =   (255,   0,   0)
 
-CIRCLE_A = [512, 100]
-CIRCLE_B = [100, 668]
-CIRCLE_C = [924, 668]
+base_a = [100, 100]
+base_b = [924, 100]
+base_c = [924, 668]
+base_d = [100, 668]
 
+start = [200, 200]
 
-START = [350, 500]
+all_base = []
+all_base.append(base_a)
+all_base.append(base_b)
+all_base.append(base_c)
+all_base.append(base_d)
 
-ALL_BALLS = []
-ALL_BALLS.append(CIRCLE_A)
-ALL_BALLS.append(CIRCLE_B)
-ALL_BALLS.append(CIRCLE_C)
+all_base.append(start)
 
-ALL_BALLS.append(START)
+def move (coord):
+    base = choice([base_a, base_b, base_c, base_d])
+    
+    maxx = max(base[0], coord[0])
+    minx = min(base[0], coord[0])
+    dx = (maxx - minx) / 1.9
 
-def MOVE (coord):
-    BASE = choice([CIRCLE_A, CIRCLE_B, CIRCLE_C])
-    nx = int((BASE[0] + coord[0]) / 2)
-    ny = int((BASE[1] + coord[1]) / 2)
+    maxy = max(base[1], coord[1])
+    miny = min(base[1], coord[1])
+    dy = (maxy - miny) / 1.9
+
+    if coord[0] >= base[0]:
+        nx = int(coord[0] - dx)
+    else:
+        nx = int(coord[0] + dx)
+    
+    if coord[1] >= base[1]:
+        ny = int(coord[1] - dy)
+    else:
+        ny = int(coord[1] + dy)
+    
     coord = [nx, ny]
     return (coord)
 
-# Draw the Base
+# Draw the base
 pygame.display.set_caption("Drawing the fractal")
 screen.fill(BLACK)
-for current in ALL_BALLS:
+for current in all_base:
         pygame.draw.circle(screen, GREEN, current, 2)    
 
 #Loop until the user clicks the close button.
@@ -56,9 +74,9 @@ while not done:
         if event.type == pygame.QUIT:
             done=True
 
-    pygame.draw.circle(screen, RED, START, 2)
+    pygame.draw.circle(screen, RED, start, 2)
 
-    START = MOVE(START)
+    start = move(start)
 
     pygame.display.flip()
 
