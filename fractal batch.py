@@ -24,6 +24,8 @@ all_base.append(base_b)
 all_base.append(base_c)
 all_base.append(start)
 
+step = 2
+
 # Set the height and width of the screen
 size = [1024, 768]
 screen = pygame.display.set_mode(size)
@@ -39,11 +41,11 @@ def move (coord):
     
     maxx = max(base[0], coord[0])
     minx = min(base[0], coord[0])
-    dx = (maxx - minx) / 2
+    dx = (maxx - minx) / step
 
     maxy = max(base[1], coord[1])
     miny = min(base[1], coord[1])
-    dy = (maxy - miny) / 2
+    dy = (maxy - miny) / step
 
     if coord[0] >= base[0]:
         nx = int(coord[0] - dx)

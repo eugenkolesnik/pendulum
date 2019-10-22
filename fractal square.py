@@ -24,6 +24,8 @@ base_d = [100, 668]
 
 start = [200, 200]
 
+step = 1.9
+
 all_base = []
 all_base.append(base_a)
 all_base.append(base_b)
@@ -37,11 +39,11 @@ def move (coord):
     
     maxx = max(base[0], coord[0])
     minx = min(base[0], coord[0])
-    dx = (maxx - minx) / 1.9
+    dx = (maxx - minx) / step
 
     maxy = max(base[1], coord[1])
     miny = min(base[1], coord[1])
-    dy = (maxy - miny) / 1.9
+    dy = (maxy - miny) / step
 
     if coord[0] >= base[0]:
         nx = int(coord[0] - dx)
@@ -73,6 +75,11 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done=True
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                 done=True
+
+# Draw the field
     colour = choice([red, green, blue, white, black])
     pygame.draw.circle(screen, colour, start, 2)
 
