@@ -22,7 +22,6 @@ all_base = []
 all_base.append(base_a)
 all_base.append(base_b)
 all_base.append(base_c)
-all_base.append(start)
 
 step = 2
 
@@ -32,25 +31,10 @@ screen = pygame.display.set_mode(size)
  
 def move (coord):
     base = choice([base_a, base_b, base_c])
-    
-    maxx = max(base[0], coord[0])
-    minx = min(base[0], coord[0])
-    dx = (maxx - minx) / step
-
-    maxy = max(base[1], coord[1])
-    miny = min(base[1], coord[1])
-    dy = (maxy - miny) / step
-
-    if coord[0] >= base[0]:
-        nx = int(coord[0] - dx)
-    else:
-        nx = int(coord[0] + dx)
-    
-    if coord[1] >= base[1]:
-        ny = int(coord[1] - dy)
-    else:
-        ny = int(coord[1] + dy)
-    
+    dx = (coord[0] - base[0]) / step
+    dy = (coord[1] - base[1]) / step
+    nx = int(coord[0] - dx)
+    ny = int(coord[1] - dy)
     coord = [nx, ny]
     return (coord)
 
@@ -77,7 +61,7 @@ while not done:
 
 # Draw the field
     colour = choice([red, green, blue, white])
-    pygame.draw.circle(screen, colour, start, 2)
+    pygame.draw.circle(screen, red, start, 2)
 
     start = move(start)
 
